@@ -1,0 +1,49 @@
+<div style="padding: 30px">
+  <p-table [value]="aeropuerto.aviones">}
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <p-button label="Adicionar" (click)="aeropuerto.form_avion.reset();aeropuerto.ver_formulario_aviones=true"></p-button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Código</th>
+        <th>Tipo</th>
+        <th>Marca</th>
+        <th>Ciudad</th>
+        <th>Accion</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-avion>
+      <tr>
+        <td>{{avion.codigo_avion}}</td>
+        <td>{{avion.tipo_avion}}</td>
+        <td>{{avion.marca}}</td>
+        <td>{{avion.ciudad_base}}</td>
+        <td><p-button label="Editar" (click)="aeropuerto.llenar_formulario_avion(avion);aeropuerto.ver_formulario_aviones=true"></p-button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog header="Formulario de Avión" [(visible)]="aeropuerto.ver_formulario_aviones">
+  <form [formGroup]="aeropuerto.form_avion">
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-4">
+        <input type="text" formControlName="codigo_avion" pInputText placeholder="Código Avión">
+      </div>
+      <div class="col-12 md:col-4">
+        <select formControlName="tipo_avion" pInputText>
+          <option value="Comercial">Comercial</option>
+          <option value="Carga">Carga</option>
+        </select>
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="text" formControlName="ciudad_base" pInputText placeholder="Ciudad Base">
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="text" formControlName="marca" pInputText placeholder="Marca">
+      </div>
+    </div>
+  </form>
+  <p-button label="Guardar" (click)="aeropuerto.guardar_actualizar_Avion()"></p-button>
+</p-dialog>
